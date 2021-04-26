@@ -1,0 +1,23 @@
+<component name="libraryTable">
+  <library name="lib">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/dist/lib/jcalendar-1.4.jar!/" />
+      <root url="jar://$PROJECT_DIR$/dist/lib/RojeruSan.lib.jar!/" />
+      <root url="jar://$PROJECT_DIR$/dist/lib/JTimeChooser_0.1.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/dist/lib/commons-digester-2.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/dist/lib/itext-pdfa-5.5.4.jar!/" />
+      <root url="jar://$PROJECT_DIR$/dist/lib/mail.jar!/" />
+      <root url="jar://$PROJECT_DIR$/dist/lib/commons-logging-1.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/dist/lib/commons-collections-3.2.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/dist/lib/groovy-2.4.5.jar!/" />
+      <root url="jar://$PROJECT_DIR$/dist/lib/RojeruSan.parte1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/dist/lib/mysql-connector-java-5.1.16-bin.jar!/" />
+      <root url="jar://$PROJECT_DIR$/dist/lib/RSProgressBar.jar!/" />
+      <root url="jar://$PROJECT_DIR$/dist/lib/itextpdf-5.5.4.jar!/" />
+      <root url="jar://$PROJECT_DIR$/dist/lib/jasperreports-6.0.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/dist/lib/KGradientPanel.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

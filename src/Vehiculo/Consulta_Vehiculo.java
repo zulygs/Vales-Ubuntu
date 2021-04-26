@@ -1,0 +1,605 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Vehiculo;
+
+import static Escritorio.Escritorio.CentrarInternal;
+import static Escritorio.Escritorio.DeskTop;
+import OtrosDriver.Conexion;
+import OtrosDriver.Driver;
+import Vale.Controlador_Vale;
+import java.sql.Connection;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
+/**
+ *
+ * @author familia
+ */
+public class Consulta_Vehiculo extends javax.swing.JInternalFrame {
+
+    /**
+     * Creates new form Consulta_Vehiculo
+     */
+    public Consulta_Vehiculo() {
+        initComponents();
+        inicio();
+
+    }
+    Conexion cx = new Conexion();
+    Connection cn;
+    Driver_Vehiculo DV = new Driver_Vehiculo();
+    Driver d = new Driver();
+    Controlador_Vale vale= new Controlador_Vale();
+
+    void inicio() {
+        cn = cx.Conectar();
+        limpiar();
+        Tabla("", cn);
+        placas = "";
+    }
+
+    void limpiar() {
+        d.OnlyNumbers(año);
+        placa.setText("");
+        modelo.setText("");
+        marca.setText("");
+        año.setText("");
+        color.setText("");
+        Buscar.setText("");
+        gass.removeAllItems();
+        gass.addItem("Regular");
+        gass.addItem("Diesel");
+        gass.addItem("Super");
+
+    }
+
+    void Tabla(String buscar, Connection cn) {
+        DefaultTableModel mod = new DefaultTableModel(){
+
+            @Override
+            public boolean isCellEditable(int filas, int columnas) {
+                if(columnas<1){
+                return true;
+                }else{
+                return false;
+                }
+            }
+    
+    };
+        String[] Titulos = {"Placa", "Marca", "Línea", "Estado"};
+        mod.setColumnIdentifiers(Titulos);
+        String[] dato = new String[4];
+        ArrayList<Modelo_Vehiculo> array = DV.Consultar(buscar, cn);
+        for (int x = 0; x < array.size(); x++) {
+            dato[0] = array.get(x).getPlaca();
+            dato[1] = array.get(x).getMarca();
+            dato[2] = array.get(x).getModelo();
+            if (array.get(x).getEstado() == 1) {
+                dato[3] = String.valueOf("Activo");
+            } else if (array.get(x).getEstado() == 0) {
+                dato[3] = "Desactivado";
+            }
+
+            mod.addRow(dato);
+
+        }
+        tabla.setModel(mod);
+    }
+
+    void Eliminar() {
+        int row = tabla.getSelectedRow();
+        if (row >= 0) {
+            int conf = JOptionPane.showConfirmDialog(null, "¿Esta seguro de eliminar?", "Alerta!", JOptionPane.YES_NO_OPTION);
+            if (conf == JOptionPane.YES_OPTION) {
+                DV.eliminar(String.valueOf(tabla.getValueAt(row, 0)), cn);
+            }
+
+        }
+    }
+    String placas = "";
+
+    void Traer_Datos(String buscar) {
+        ArrayList<Modelo_Vehiculo> mod = DV.Consultar(buscar, cn);
+        if (mod.size() > 0) {
+           // placa.setEditable(false);
+            marca.setText(mod.get(0).getMarca());
+            modelo.setText(mod.get(0).getModelo());
+            año.setText(String.valueOf(mod.get(0).getYear()));
+            color.setText(mod.get(0).getColor());
+            if (mod.get(0).getGas().equals("Regular")) {
+                  gass.removeAllItems();
+                gass.addItem("Regular");
+                gass.addItem("Diesel");
+                gass.addItem("Super");
+            } else if (mod.get(0).getGas().equals("Diesel")) {
+                  gass.removeAllItems();
+                gass.addItem("Diesel");
+                gass.addItem("Regular");
+                gass.addItem("Super");
+            } else if (mod.get(0).getGas().equals("Super")) {
+                  gass.removeAllItems();
+                gass.addItem("Super");
+                gass.addItem("Regular");
+                gass.addItem("Diesel");
+            }
+
+            if (mod.get(0).getEstado() == 0) {
+                no.isSelected();
+                no.setSelected(true);
+                activo.setSelected(false);
+            } else {
+                activo.isSelected();
+                activo.setSelected(true);
+                no.setSelected(false);
+            }
+
+        }
+
+    }
+
+    void Editar() {
+        int row = tabla.getSelectedRow();
+        if (row >= 0) {
+            placas = tabla.getValueAt(row, 0).toString();
+            placa.setText(tabla.getValueAt(row, 0).toString());
+            placa.setEditable(true);
+            Traer_Datos(tabla.getValueAt(row, 0).toString());
+
+        }
+
+    }
+
+    int estado() {
+        int av = 0;
+        if (activo.isSelected()) {
+            av = 1;
+        } else if (no.isSelected()) {
+            av = 0;
+        }
+
+        return av;
+    }
+
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        jPopupMenu1 = new javax.swing.JPopupMenu();
+        Eliminar = new javax.swing.JMenuItem();
+        Edit = new javax.swing.JMenuItem();
+        buttonGroup1 = new javax.swing.ButtonGroup();
+        jTabbedPane1 = new javax.swing.JTabbedPane();
+        jPanel1 = new javax.swing.JPanel();
+        kGradientPanel1 = new keeptoo.KGradientPanel();
+        jLabel6 = new javax.swing.JLabel();
+        placa = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        marca = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        modelo = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        color = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
+        año = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        activo = new javax.swing.JRadioButton();
+        no = new javax.swing.JRadioButton();
+        jPanel2 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tabla = new javax.swing.JTable();
+        jLabel5 = new javax.swing.JLabel();
+        Buscar = new javax.swing.JTextField();
+        BttLimpiar1 = new javax.swing.JButton();
+        edit = new javax.swing.JButton();
+        BttLimpiar = new javax.swing.JButton();
+        Add = new javax.swing.JButton();
+        gass = new javax.swing.JComboBox();
+
+        Eliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/Trash_25px.png"))); // NOI18N
+        Eliminar.setText("Eliminar");
+        Eliminar.setComponentPopupMenu(jPopupMenu1);
+        Eliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EliminarActionPerformed(evt);
+            }
+        });
+        jPopupMenu1.add(Eliminar);
+
+        Edit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/Edit_25px.png"))); // NOI18N
+        Edit.setText("Editar");
+        Edit.setComponentPopupMenu(jPopupMenu1);
+        Edit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EditActionPerformed(evt);
+            }
+        });
+        jPopupMenu1.add(Edit);
+
+        setClosable(true);
+        setIconifiable(true);
+        setMaximizable(true);
+        setTitle("Consulta Vehículo");
+
+        jTabbedPane1.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
+
+        jPanel1.setBackground(new java.awt.Color(0, 204, 204));
+        jPanel1.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
+
+        kGradientPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Datos De Vehículos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Berlin Sans FB", 0, 14), new java.awt.Color(255, 255, 255))); // NOI18N
+        kGradientPanel1.setEndColor(new java.awt.Color(0, 204, 204));
+        kGradientPanel1.setStartColor(new java.awt.Color(0, 102, 204));
+
+        jLabel6.setFont(new java.awt.Font("Berlin Sans FB", 0, 18)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setText("Placa:");
+        kGradientPanel1.add(jLabel6);
+        jLabel6.setBounds(30, 30, 47, 21);
+
+        placa.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
+        placa.setText("jTextField1");
+        placa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                placaActionPerformed(evt);
+            }
+        });
+        kGradientPanel1.add(placa);
+        placa.setBounds(80, 30, 150, 30);
+
+        jLabel9.setFont(new java.awt.Font("Berlin Sans FB", 0, 18)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel9.setText("Marca:");
+        kGradientPanel1.add(jLabel9);
+        jLabel9.setBounds(30, 70, 51, 21);
+
+        marca.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
+        marca.setText("jTextField2");
+        kGradientPanel1.add(marca);
+        marca.setBounds(90, 70, 170, 30);
+
+        jLabel4.setFont(new java.awt.Font("Berlin Sans FB", 0, 18)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("Línea:");
+        kGradientPanel1.add(jLabel4);
+        jLabel4.setBounds(270, 70, 46, 21);
+
+        modelo.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
+        modelo.setText("jTextField3");
+        kGradientPanel1.add(modelo);
+        modelo.setBounds(340, 70, 125, 30);
+
+        jLabel8.setFont(new java.awt.Font("Berlin Sans FB", 0, 18)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel8.setText("Color:");
+        kGradientPanel1.add(jLabel8);
+        jLabel8.setBounds(310, 150, 44, 21);
+
+        color.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
+        color.setText("jTextField6");
+        kGradientPanel1.add(color);
+        color.setBounds(360, 150, 136, 30);
+
+        jLabel10.setFont(new java.awt.Font("Berlin Sans FB", 0, 18)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel10.setText("Año:");
+        kGradientPanel1.add(jLabel10);
+        jLabel10.setBounds(30, 110, 49, 21);
+
+        año.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
+        año.setText("jTextField4");
+        kGradientPanel1.add(año);
+        año.setBounds(90, 110, 204, 30);
+
+        jLabel7.setFont(new java.awt.Font("Berlin Sans FB", 0, 18)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setText("Tipo de Gas: ");
+        kGradientPanel1.add(jLabel7);
+        jLabel7.setBounds(30, 140, 98, 21);
+
+        jLabel12.setFont(new java.awt.Font("Berlin Sans FB", 0, 18)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel12.setText("Estado:");
+        kGradientPanel1.add(jLabel12);
+        jLabel12.setBounds(190, 190, 55, 21);
+
+        buttonGroup1.add(activo);
+        activo.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
+        activo.setText("Activo");
+        kGradientPanel1.add(activo);
+        activo.setBounds(260, 190, 61, 25);
+
+        buttonGroup1.add(no);
+        no.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
+        no.setText("Inactivo");
+        kGradientPanel1.add(no);
+        no.setBounds(340, 190, 69, 25);
+
+        jPanel2.setBackground(new java.awt.Color(0, 204, 204));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Registro de Vehículos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Berlin Sans FB", 0, 14), new java.awt.Color(255, 255, 255))); // NOI18N
+        jPanel2.setToolTipText("");
+        jPanel2.setOpaque(false);
+
+        tabla.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
+        tabla.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        tabla.setComponentPopupMenu(jPopupMenu1);
+        tabla.setGridColor(new java.awt.Color(0, 102, 204));
+        tabla.setSelectionBackground(new java.awt.Color(51, 153, 255));
+        jScrollPane1.setViewportView(tabla);
+
+        jLabel5.setFont(new java.awt.Font("Berlin Sans FB", 0, 18)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("Placa o Marca:");
+
+        Buscar.setText("jTextField1");
+        Buscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BuscarActionPerformed(evt);
+            }
+        });
+        Buscar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                BuscarKeyReleased(evt);
+            }
+        });
+
+        BttLimpiar1.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
+        BttLimpiar1.setForeground(new java.awt.Color(255, 255, 255));
+        BttLimpiar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/Loader_35px.png"))); // NOI18N
+        BttLimpiar1.setText("Cargar Tabla");
+        BttLimpiar1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        BttLimpiar1.setContentAreaFilled(false);
+        BttLimpiar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BttLimpiar1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(47, 47, 47)
+                .addComponent(BttLimpiar1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 668, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel5)
+                        .addComponent(Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(BttLimpiar1, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        kGradientPanel1.add(jPanel2);
+        jPanel2.setBounds(10, 220, 700, 280);
+        jPanel2.getAccessibleContext().setAccessibleName("Registro de Vehiculos");
+
+        edit.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
+        edit.setForeground(new java.awt.Color(255, 255, 255));
+        edit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/Edit_45px.png"))); // NOI18N
+        edit.setText("Editar");
+        edit.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        edit.setContentAreaFilled(false);
+        edit.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/Edit_55px.png"))); // NOI18N
+        edit.setRolloverSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/Edit_45px.png"))); // NOI18N
+        edit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editActionPerformed(evt);
+            }
+        });
+        kGradientPanel1.add(edit);
+        edit.setBounds(520, 40, 140, 50);
+
+        BttLimpiar.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
+        BttLimpiar.setForeground(new java.awt.Color(255, 255, 255));
+        BttLimpiar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/broom_45px.png"))); // NOI18N
+        BttLimpiar.setText("Limpiar");
+        BttLimpiar.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        BttLimpiar.setContentAreaFilled(false);
+        BttLimpiar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/Broom_555px.png"))); // NOI18N
+        BttLimpiar.setRolloverSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/broom_45px.png"))); // NOI18N
+        BttLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BttLimpiarActionPerformed(evt);
+            }
+        });
+        kGradientPanel1.add(BttLimpiar);
+        BttLimpiar.setBounds(520, 120, 140, 49);
+
+        Add.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
+        Add.setForeground(new java.awt.Color(255, 255, 255));
+        Add.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/Add_35px.png"))); // NOI18N
+        Add.setText("Añadir Vehículo");
+        Add.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        Add.setContentAreaFilled(false);
+        Add.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AddActionPerformed(evt);
+            }
+        });
+        kGradientPanel1.add(Add);
+        Add.setBounds(250, 20, 190, 39);
+
+        gass.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
+        gass.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        kGradientPanel1.add(gass);
+        gass.setBounds(130, 150, 130, 20);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(kGradientPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 726, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(kGradientPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 516, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 20, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Consultar Vehículos", new javax.swing.ImageIcon(getClass().getResource("/iconos/Query_35px.png")), jPanel1); // NOI18N
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jTabbedPane1)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 585, Short.MAX_VALUE)
+        );
+
+        jTabbedPane1.getAccessibleContext().setAccessibleName("Consultar Vehículos");
+
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void EliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarActionPerformed
+        // TODO add your handling code here:
+        Eliminar();
+        Tabla("", cn);
+    }//GEN-LAST:event_EliminarActionPerformed
+
+    private void EditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditActionPerformed
+        // TODO add your handling code here:
+        Editar();
+
+        placa.setEditable(true);
+    }//GEN-LAST:event_EditActionPerformed
+
+    private void placaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_placaActionPerformed
+        // TODO add your handling code here:
+        Traer_Datos(placa.getText());
+    }//GEN-LAST:event_placaActionPerformed
+
+    private void editActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editActionPerformed
+        // TODO add your handling code here:
+           if (placa.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "<html><font face='Berlin Sans FB' size='6' color='094293'>¡Introduzca Placa!</font></html>", "Error", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        if (marca.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "<html><font face='Berlin Sans FB' size='6' color='094293'>¡Introduzca Marca!</font></html>", "Error", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        if (modelo.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "<html><font face='Berlin Sans FB' size='6' color='094293'>¡Introduzca Contraseña!</font></html>", "Error", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+      
+        if (color.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "<html><font face='Berlin Sans FB' size='6' color='094293'>¡Introduzca Color!</font></html>", "Error", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        if (año.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "<html><font face='Berlin Sans FB' size='6' color='094293'>¡Introduzca año!</font></html>", "Error", JOptionPane.WARNING_MESSAGE);
+            return;
+        } else {
+        DV.editar_Vehiculo(placas,placa.getText(), marca.getText(), modelo.getText(), Integer.parseInt(año.getText()), gass.getSelectedItem().toString(), color.getText(), estado(), cn);
+        Tabla("", cn);
+        limpiar();
+        }
+    }//GEN-LAST:event_editActionPerformed
+
+    private void BttLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BttLimpiarActionPerformed
+        // TODO add your handling code here:
+        limpiar();
+    }//GEN-LAST:event_BttLimpiarActionPerformed
+
+    private void BuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BuscarKeyReleased
+        // TODO add your handling code here:
+        Tabla(Buscar.getText(), cn);
+    }//GEN-LAST:event_BuscarKeyReleased
+
+    private void BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarActionPerformed
+        // TODO add your handling code here:
+        Tabla(Buscar.getText(), cn);
+    }//GEN-LAST:event_BuscarActionPerformed
+
+    private void AddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddActionPerformed
+        // TODO add your handling code here:
+
+        Vehiculo NU = new Vehiculo();
+        DeskTop.add(NU);
+        CentrarInternal(NU);
+        NU.show();
+    }//GEN-LAST:event_AddActionPerformed
+
+    private void BttLimpiar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BttLimpiar1ActionPerformed
+        // TODO add your handling code here:
+        d.reiniciarJTable(tabla);
+        Tabla("", cn);
+    }//GEN-LAST:event_BttLimpiar1ActionPerformed
+
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Add;
+    private javax.swing.JButton BttLimpiar;
+    private javax.swing.JButton BttLimpiar1;
+    private javax.swing.JTextField Buscar;
+    private javax.swing.JMenuItem Edit;
+    private javax.swing.JMenuItem Eliminar;
+    private javax.swing.JRadioButton activo;
+    private javax.swing.JTextField año;
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JTextField color;
+    private javax.swing.JButton edit;
+    private javax.swing.JComboBox gass;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPopupMenu jPopupMenu1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTabbedPane jTabbedPane1;
+    private keeptoo.KGradientPanel kGradientPanel1;
+    private javax.swing.JTextField marca;
+    private javax.swing.JTextField modelo;
+    private javax.swing.JRadioButton no;
+    private javax.swing.JTextField placa;
+    private javax.swing.JTable tabla;
+    // End of variables declaration//GEN-END:variables
+}

@@ -1,0 +1,349 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="vale" language="groovy" pageWidth="300" pageHeight="350" columnWidth="260" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="935ea112-6e1e-4fc4-a1dc-4be2026d9692">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="17"/>
+	<parameter name="id_vale" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT v.Id_Vale,v.FechaHora,v.Firma,v.Despachador,v.Administrador,vi.Id_Visitante,vi.Nombre,p.Id_Placa,p.Marca,v.Monto,(select ubicacion from empresa e where vi.id_empresa=e.id_empresa)'direccion',p.tipo_gas from vales v
+                    join visitante vi on(v.Id_Visitante=vi.Id_Visitante)
+                    join vehiculo p on(v.Id_Placa=p.Id_Placa)
+                    where v.Id_Vale=$P{id_vale}]]>
+	</queryString>
+	<field name="Id_Vale" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="FechaHora" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Firma" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Despachador" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Administrador" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Id_Visitante" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Nombre" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Id_Placa" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Marca" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Monto" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="direccion" class="java.lang.String"/>
+	<field name="tipo_gas" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<variable name="variable1" class="java.lang.String" calculation="Sum">
+		<variableExpression><![CDATA[$F{Monto}]]></variableExpression>
+	</variable>
+	<title>
+		<band height="84" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="150" height="11" uuid="5948a1af-1486-474b-b239-ff0cddcc9ae1"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[VALE LIBRE DE PROTESTO A:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="11" width="150" height="11" uuid="3a71392b-2a45-4ccb-8566-11440ce1d3b4"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[ESTACION DE SERVICIO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="22" width="150" height="11" uuid="40405756-bab7-45b9-ac93-5e5d68f0d6d0"/>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SAN CRISTOBAL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="33" width="150" height="16" uuid="c0888c54-f440-4c0f-b28e-919e989e477a"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA["ADECONSA"]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="49" width="150" height="11" uuid="adc562f4-8d6d-42f1-bfcf-4b7c91fb2685"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[3a calle Manzana "N" sector B-12 14-65,]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="60" width="150" height="11" uuid="b442e543-b871-40a7-b7ca-def256a2ca0e"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[zona 8, San Cristobal, Mixco, Guatemala]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="71" width="150" height="11" uuid="a2ad72df-4a8e-478e-8c03-035d44bc6916"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Tels: 2443-2648 * 2443-2649]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="160" y="33" width="16" height="16" uuid="34a8a839-a6b2-423d-8d86-d8b28aca1139"/>
+				<textElement>
+					<font fontName="Franklin Gothic Medium"/>
+				</textElement>
+				<text><![CDATA[Nº.]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="178" y="33" width="60" height="16" uuid="0608b69d-bc5f-4cdb-b862-eb4f4195de52"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{Id_Vale}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<detail>
+		<band height="97" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="2" width="260" height="56" uuid="3e3f6f61-0b0a-40bb-a69f-1059306fad67"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="5" y="5" width="49" height="11" uuid="12274309-c1b8-4079-abd0-e671c8910357"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Guatemala,]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="5" y="22" width="34" height="11" uuid="853b5607-6a0f-462c-91cb-7c5a1ead2173"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Nombre:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="39" y="22" width="115" height="11" uuid="cbad3673-b635-40fb-9afe-1ac112301b10"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Nombre}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="54" y="16" width="100" height="1" uuid="b970f7ce-d00f-4584-9218-9a0a136a5680"/>
+			</line>
+			<line>
+				<reportElement x="39" y="32" width="115" height="1" uuid="2181c1c9-6728-4550-a807-bd2ecb354ddb"/>
+			</line>
+			<staticText>
+				<reportElement x="160" y="22" width="16" height="11" uuid="d697d1a5-9051-4115-ad52-344efebc1f3a"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Nit:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="176" y="22" width="72" height="11" uuid="26799680-10e4-4fb9-a733-592c5bd88ece"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Id_Visitante}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="176" y="33" width="72" height="1" uuid="d72db60b-cd3b-4d90-aa97-586717789702"/>
+			</line>
+			<staticText>
+				<reportElement x="5" y="38" width="40" height="11" uuid="4113ea02-5613-4cff-b3db-fd2301caeb3a"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[direccion:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="45" y="38" width="88" height="11" uuid="77f7f615-b7a2-438a-a85c-017067807a4b"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{direccion}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="135" y="38" width="43" height="11" uuid="7c56667b-730e-45d6-af18-85a2b74c1535"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Placa No.:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="178" y="38" width="72" height="11" uuid="2c351170-e47a-426b-a429-9a7630ea8676"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Id_Placa}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="178" y="48" width="72" height="1" uuid="37225906-6890-4623-957b-68fce411c8a7"/>
+			</line>
+			<line>
+				<reportElement x="45" y="47" width="88" height="1" uuid="184f9b17-b048-47d6-be04-05808f9a6169"/>
+			</line>
+			<rectangle>
+				<reportElement x="0" y="63" width="133" height="32" uuid="efed15d9-e87f-4fa7-b5fa-a0af4f491190"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="133" y="63" width="127" height="32" uuid="ca3128d9-3367-4ac3-9841-b36e33d22a6b"/>
+			</rectangle>
+			<line>
+				<reportElement x="0" y="76" width="260" height="1" uuid="0df48505-1d79-4363-991a-19b5d07d1be5"/>
+			</line>
+			<staticText>
+				<reportElement x="5" y="65" width="114" height="11" uuid="fdd66d59-a956-4924-b4ef-6c4d8857103f"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Galones]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="136" y="65" width="114" height="11" uuid="df0feb9f-d11d-4bf0-a9be-433cefc14f8a"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Valor]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="160" y="80" width="65" height="11" uuid="0f6124ed-e0e0-4dee-bb93-b5ecdb271d54"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Monto}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="135" y="80" width="24" height="11" uuid="7278c099-0873-49d3-95c6-61c4b4dc1b2e"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Q.]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="12" y="80" width="100" height="11" uuid="5256d1ce-a052-4493-94fb-8573c067961c"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tipo_gas}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="54" y="5" width="100" height="11" uuid="54b4d937-7bf3-47c3-ae5d-21703083bcfa"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{FechaHora}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="127" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="133" height="18" uuid="9b5dfd73-587c-4a5c-9a4c-ffc616db0b7b"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="133" y="0" width="127" height="18" uuid="278cb79e-7a5e-4962-b809-29134ac701ea"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="6" y="4" width="114" height="11" uuid="cccc98ba-600e-41ea-8475-738e67038f47"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Total:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="160" y="3" width="66" height="11" uuid="502e29a8-f9c1-4e92-ad8a-0280892bb346"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{variable1}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="25" width="260" height="11" uuid="08c4e710-08c4-4370-8b82-07c24aab13f5"/>
+				<textElement textAlignment="Center">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[El importe del vale devengará la tasa de interés legal, a partir del dia siguiente]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="36" width="260" height="11" uuid="b18b7cd9-e625-4807-93b5-689e88cae8cb"/>
+				<textElement textAlignment="Center">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[a aquel en que sea exigible, sin necesidad de requerimiento alguno. Estacion]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="47" width="260" height="11" uuid="175f26bf-798c-4120-ae52-86dc1534aa45"/>
+				<textElement textAlignment="Center">
+					<font size="7" isBold="false"/>
+				</textElement>
+				<text><![CDATA[de Servicio, "SAN CRISTOBAL ACODENSA" podra capitalizar los intereses.]]></text>
+			</staticText>
+			<line>
+				<reportElement x="12" y="84" width="100" height="1" uuid="66bd9b36-6a3f-4125-a837-e1b77160c1ba"/>
+			</line>
+			<staticText>
+				<reportElement x="12" y="85" width="100" height="11" uuid="e00a813d-f741-4bfd-bff6-95dcdbbe4477"/>
+				<textElement textAlignment="Center">
+					<font size="7" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Cliente]]></text>
+			</staticText>
+			<line>
+				<reportElement x="148" y="84" width="100" height="1" uuid="a8ea2dee-a959-4418-b25c-da233fe648cd"/>
+			</line>
+			<staticText>
+				<reportElement x="150" y="85" width="100" height="11" uuid="e3cc88f1-c301-4a0a-94b3-72df842daf50"/>
+				<textElement textAlignment="Center">
+					<font size="7" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Despachador]]></text>
+			</staticText>
+			<line>
+				<reportElement x="76" y="113" width="100" height="1" uuid="6011a7d4-3ac1-4103-9f20-5c447f1a5209"/>
+			</line>
+			<staticText>
+				<reportElement x="76" y="114" width="100" height="11" uuid="39a4148a-a6d7-4f3e-9a9e-9cab2fa7a8aa"/>
+				<textElement textAlignment="Center">
+					<font size="7" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Administrador]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="74" width="12" height="11" uuid="8ef85ce2-07e8-45c2-be71-bcd981fea5b9"/>
+				<textElement textAlignment="Center">
+					<font size="7" isBold="false"/>
+				</textElement>
+				<text><![CDATA[F]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="133" y="74" width="12" height="11" uuid="5033efc2-3f89-435c-a07a-73813a469377"/>
+				<textElement textAlignment="Center">
+					<font size="7" isBold="false"/>
+				</textElement>
+				<text><![CDATA[F]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="45" y="102" width="31" height="11" uuid="316b37d2-f84d-4332-97e4-770b46f6b8ca"/>
+				<textElement textAlignment="Center">
+					<font size="7" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Vo. Bo]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>

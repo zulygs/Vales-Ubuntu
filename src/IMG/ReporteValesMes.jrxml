@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ReporteValesMes" language="groovy" pageWidth="602" pageHeight="814" columnWidth="562" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ae955612-f3e0-4cd6-b149-21bab3b12bcc">
+	<property name="ireport.zoom" value="3.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="270"/>
+	<parameter name="mes" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select v.Id_Vale,DATE_FORMAT(v.FechaHora,'%Y-%m-%d')'fecha',Firma,v.despachador,Administrador,vi.Id_Visitante,vi.Nombre,v.Id_Placa,ve.Marca,FORMAT(v.Monto,2)'monto',vi.id_empresa,(select nombreEmpresa from empresa e where vi.id_empresa=e.id_Empresa)'empresa',v.estado from vales v
+           join vehiculo ve on(v.Id_Placa=ve.Id_Placa)
+                join visitante vi on(v.Id_Visitante=vi.Id_Visitante)
+                 where DATE_FORMAT(FechaHora,'%Y-%m')=$P{mes}]]>
+	</queryString>
+	<field name="Id_Vale" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="fecha" class="java.lang.String"/>
+	<field name="Firma" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="despachador" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Administrador" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Id_Visitante" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Nombre" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Id_Placa" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Marca" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="monto" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="id_empresa" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="empresa" class="java.lang.String"/>
+	<field name="estado" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="97" splitType="Stretch">
+			<image hAlign="Center" vAlign="Middle">
+				<reportElement x="0" y="0" width="562" height="71" uuid="c388475f-0172-4c63-914d-256d0a0dbed5"/>
+				<imageExpression><![CDATA["C:\\Users\\Zuly\\Desktop\\Compilar\\Crear Exe a partir de Jar\\logoo.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="1" y="62" width="561" height="14" uuid="3b3b8569-2af2-49dd-856b-496533a91db3"/>
+				<textElement textAlignment="Center">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[sistema de agua de ciudad San Cristobal ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="73" width="561" height="14" uuid="41aa9963-c83f-4190-a778-c9ae0dd4317e"/>
+				<textElement textAlignment="Center">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Intervención Municipal]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="92" splitType="Stretch">
+			<rectangle>
+				<reportElement x="1" y="63" width="561" height="26" backcolor="#669900" uuid="ae51783f-ec1b-458c-9f69-765b489e3029"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="0" y="0" width="562" height="50" backcolor="#00CCCC" uuid="4d0611e1-34dc-48b1-9a92-fe15054e1709"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="1" y="0" width="561" height="50" uuid="809eb0fd-4307-4465-9fc2-a52bbf9026d7"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="36" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Control de vales de combustible]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="510" y="63" width="52" height="26" backcolor="#669900" uuid="67e3fca3-d20d-4b94-9f98-392130bde5e0"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="359" y="63" width="66" height="26" backcolor="#669900" uuid="876c5d36-d28b-40d5-95c5-b1ebf7e22fbf"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="303" y="63" width="56" height="26" backcolor="#669900" uuid="3c6b2e39-0cf1-4890-b225-dd937b2acf9b"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="238" y="63" width="65" height="26" backcolor="#669900" uuid="0a6b062e-4a96-4b7b-8291-0662f9e67d47"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="163" y="63" width="75" height="26" backcolor="#669900" uuid="9e3134ef-eaf8-47f2-bd44-cc70990a5ca4"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="112" y="63" width="51" height="26" backcolor="#669900" uuid="20860ed8-683e-49ca-9265-f9b86d07b1af"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="72" y="63" width="40" height="26" backcolor="#669900" uuid="96520ca6-f02a-423a-8b2b-737aad29ca7e"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="0" y="63" width="73" height="26" backcolor="#669900" uuid="dde8a9ca-d400-40a5-9e6b-62a9fed84f34"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="62" width="73" height="27" backcolor="#669900" uuid="f0d49ac0-fda7-480b-81ef-41120039ca54"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="73" y="62" width="38" height="27" backcolor="#669900" uuid="c589fe86-b32c-401c-8572-6d2183b088a1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Id Vale]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="112" y="62" width="52" height="27" backcolor="#669900" uuid="d9c4ac69-46ed-4c1f-8034-734007bcc068"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Firma]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="164" y="62" width="75" height="27" backcolor="#669900" uuid="4a2cb89f-312f-45f0-9ce3-5b742e8cc450"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Despachador]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="239" y="62" width="64" height="27" backcolor="#669900" uuid="e10f2871-b68c-4ddf-b670-add0b8b64def"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Visitante]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="303" y="62" width="55" height="27" backcolor="#669900" uuid="cedf16d6-dfab-4dad-aff5-550290b49547"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Placa]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="359" y="62" width="66" height="27" backcolor="#669900" uuid="55c99d1f-812b-482c-bb36-1601814cd528"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Monto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="427" y="62" width="83" height="27" backcolor="#669900" uuid="006cf084-9148-4f1d-9057-51f17289051e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Empresa]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="510" y="62" width="52" height="27" backcolor="#669900" uuid="e3ffe966-17b6-455e-9aaa-e0a2d52c819b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Estado]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="21" splitType="Stretch">
+			<rectangle>
+				<reportElement x="73" y="1" width="38" height="19" uuid="5aee44de-f7e9-4cf9-8904-5049d9338f69"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="0" y="1" width="73" height="19" uuid="cc2678db-b4ae-4ba4-a807-8d58f5f06b0a"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="510" y="1" width="52" height="19" uuid="3ed4a22c-c00d-47d0-b63e-b04bdeaaaa71"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="426" y="1" width="84" height="19" uuid="42b52758-6806-4800-b63d-2943bab9c9d1"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="360" y="1" width="66" height="19" uuid="bfeaf70a-5f33-4d1f-8a64-f929785db430"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="304" y="1" width="56" height="19" uuid="37d9cb94-4971-4095-80a1-7298e30b1293"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="239" y="1" width="65" height="19" uuid="0deac477-cbb2-403d-96e0-a4155386cdc6"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="163" y="1" width="76" height="19" uuid="fa8909ac-2aaa-4cac-a873-73363521ebcb"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="111" y="1" width="53" height="19" uuid="05238a1f-af1a-486a-89d1-2c37717ad2c1"/>
+			</rectangle>
+			<textField>
+				<reportElement x="2" y="0" width="69" height="20" uuid="7d3ee9be-4491-48b2-8dd7-9f8cb31151cc"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fecha}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="112" y="0" width="52" height="20" uuid="5fe0ea69-c63e-4230-abf5-dc6eac81c205"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Firma}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="164" y="0" width="75" height="20" uuid="f963c0c5-dc9c-4915-a2a0-35c2536b3e3a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{despachador}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="259" y="0" width="45" height="19" uuid="70f8be06-58bd-4131-9e2e-5b8a5e6e354e"/>
+				<textElement verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Nombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="304" y="0" width="56" height="20" uuid="fa70b44f-9332-4b3c-ab87-396d6ecde7b4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Id_Placa}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="360" y="0" width="15" height="20" uuid="ffebe74a-885a-46d7-abf2-bf51750e3299"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[Q]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="426" y="0" width="84" height="20" uuid="e4f8167f-ca05-48ee-9e43-7421bef5bf81"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{empresa}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="510" y="0" width="52" height="20" uuid="32c398eb-512d-4e21-a1d3-30f40bc89692"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{estado}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="240" y="-1" width="20" height="20" uuid="139ef452-66de-4c77-9827-45b73517019a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Id_Visitante} ]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="73" y="1" width="39" height="18" uuid="dcdb77da-961c-4be8-8958-6c2504937fcb"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Id_Vale}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="375" y="1" width="52" height="20" uuid="53b3481c-77bb-44cc-bc0d-bdf718095710"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{monto}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>
