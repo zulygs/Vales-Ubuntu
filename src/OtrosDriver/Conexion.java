@@ -21,8 +21,8 @@ public class Conexion {
         try {
             Class.forName("com.mysql.jdbc.Driver");
            // c = DriverManager.getConnection("jdbc:mysql://192.168.0.9/SascimVisitas", "zuly", "sascim2019db");
-          c = DriverManager.getConnection("jdbc:mysql://192.168.0.9/SascimVisitaspruebas", "zuly", "sascim2019db");
-           //c = DriverManager.getConnection("jdbc:mysql://192.168.0.9/SascimVisitas", "zuly", "sascim2019db");
+          //c = DriverManager.getConnection("jdbc:mysql://192.168.0.9/SascimVisitaspruebas", "zuly", "sascim2019db");
+           c = DriverManager.getConnection("jdbc:mysql://192.168.0.9/SascimVisitas", "zuly", "sascim2019db");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error de conexion");
             e.printStackTrace();
